@@ -13,7 +13,7 @@ struct ProfileView: View {
     @Namespace var animation
     @State var images = ["saveEarth", "energySaving", "ecoWater"]
     @State var points  = [[50,100], [20,100], [130,200], [90,100]]
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+//    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     var body: some View {
        
@@ -43,17 +43,17 @@ struct ProfileView_Previews: PreviewProvider {
         ProfileView()
     }
 }
-
+//(alignment: .bottomLeading)
 extension ProfileView{
     var headerView: some View{
-        ZStack(alignment: .bottomLeading){
+        ZStack{
             Color("ourlightgreen")
                 .ignoresSafeArea()
             
             VStack (alignment: .leading){
-                Spacer(minLength: 50)
+                Spacer(minLength: 70)
                 HStack {
-                    Spacer()
+                  //  Spacer()
 //                    Button {
 //
 //                    } label: {
@@ -63,18 +63,19 @@ extension ProfileView{
 //                            .foregroundColor(.white)
 //                           // .offset(x: -15, y: 15)
 //                    }
-                    Button(action: {
-                               self.presentationMode.wrappedValue.dismiss()
-                            }) {
-                                Image(systemName: "arrow.left")
-                                   // .padding()
-                                    .resizable()
-                                                                .frame(width: 20, height: 16)
-                                                                .foregroundColor(.white)
-                                                               // .offset(x: -15, y: 15)
-                            }
-                            .navigationBarHidden(true)
-                    Spacer(minLength: 250)
+//                    Button(action: {
+//                               self.presentationMode.wrappedValue.dismiss()
+//                            }) {
+//                                Image(systemName: "arrow.left")
+//                                   // .padding()
+//                                    .resizable()
+//                                                                .frame(width: 20, height: 16)
+//                                                                .foregroundColor(.white)
+//                                                               // .offset(x: -15, y: 15)
+//                            }
+//                            .navigationBarBackButtonHidden(true)
+                                   
+                    Spacer()
                     Button {
                         GoToSting.toggle()
                     } label: {
@@ -89,8 +90,9 @@ extension ProfileView{
                     .fullScreenCover(isPresented: $GoToSting){
                         Ivy.SettingView()
                     }
-                    Spacer()
+                    //Spacer()
                 }
+                .padding(.horizontal)
                 
                 Image("profile")
                     .resizable()
@@ -102,11 +104,11 @@ extension ProfileView{
 //                Circle()
 //                    .fill(.red)
 //                    .frame(width: 150, height: 150)
-                .offset(x: 30,y : 40)
+                .offset(x: 30,y : 20)
             }
         }
-        .frame(height: 50)
-        .padding(.bottom,50)
+        .frame(height: 100)
+        .padding(.bottom)
     }
     
     var userInfoDetails: some View{
