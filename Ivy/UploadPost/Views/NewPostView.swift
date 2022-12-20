@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct NewPostView: View {
-
+    @State var ispickerShowing = false
+    @State var selectedImage: UIImage?
+    @State private var PostNewPost = false
     @State private var caption = ""
+    
     @Environment(\.presentationMode) var presentationMode
     var body: some View {
         VStack{
@@ -22,8 +25,9 @@ struct NewPostView: View {
 
                 }
                 Spacer()
+                
                 Button {
-                    print("Post")
+                    PostNewPost.toggle()
                 } label: {
                     Text("Post")
                         .bold()
@@ -35,7 +39,9 @@ struct NewPostView: View {
                 }
             }
             .padding()
-            
+            .fullScreenCover(isPresented: $PostNewPost) {
+                FeedView()
+            }
 
             
             HStack(alignment: .top){
@@ -46,6 +52,68 @@ struct NewPostView: View {
                 
             }
             .padding()
+            
+//            VStack{
+//                VStack {
+//                    if selectedImage != nil {
+//                        Image(uiImage: selectedImage! )
+//                            .resizable()
+//                            .frame(width: 350 ,height: 350)
+//                            .cornerRadius(40)
+//                            .padding(.trailing, 2.0)
+//
+//
+//                    }
+//                    else {
+//
+//
+//                        Image("Pic1")
+//                            .resizable()
+//                            .frame(width: 350 ,height: 350)
+//                            .cornerRadius(40)
+//                            .padding()
+//                    }
+//                }
+//
+//
+//                VStack{
+//                    Button {
+//                        ispickerShowing = true
+//
+//
+//                    } label: {
+//
+//                        HStack {
+//
+//                            Image(systemName: "ourgreen")
+//
+//                                .font(.system(size:20))
+//                                .foregroundColor(.white)
+//                                .padding([.vertical,.leading])
+//                            Text("picture")
+//                                .font(.headline)
+//                                .foregroundColor(.white)
+//                                .frame(width: 100, height: 40)
+//
+//
+//                        }.frame(width: 170,height: 40).background(Color("ourwhite"))
+//
+//                            .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
+//
+//
+//                            .sheet(isPresented:$ispickerShowing, onDismiss: nil){
+//                                //            image picker
+//                                ImagePicker(selectedImage: $selectedImage , isPickerShowing: $ispickerShowing)
+//
+//
+//                            }
+//
+//                    }
+//
+//
+//
+//                    }
+//            }
             
             UploadAnImage()
             
@@ -58,4 +126,5 @@ struct NewPostView_Previews: PreviewProvider {
     static var previews: some View {
         NewPostView()
     }
+    
 }

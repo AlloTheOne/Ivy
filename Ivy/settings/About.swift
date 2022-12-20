@@ -12,7 +12,7 @@ struct About: View {
         ZStack{
             Color("ouroffwhite")
                 .ignoresSafeArea()
-            VStack(alignment: .leading, spacing: 15) {
+            VStack(alignment: .leading , spacing: 15) {
                 
                 
                 

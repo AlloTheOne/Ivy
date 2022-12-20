@@ -13,7 +13,7 @@ struct PostsRawView: View {
             //Profile + user info + post
             HStack(alignment: .top, spacing: 12){
                     Circle()
-                    .frame(width: 60, height: 60)
+                    .frame(width: 70, height: 70)
                     .foregroundColor(Color("ourdarkgray"))
                 //User info + Post
                 VStack (alignment: .leading, spacing: 4){
@@ -84,7 +84,7 @@ struct PostsRawView: View {
 
               
             }
-            .padding()
+            .padding(.bottom, 5)
             .foregroundColor(Color("ourlightgray"))
             Divider()
 

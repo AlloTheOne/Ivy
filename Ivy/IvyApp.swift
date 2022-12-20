@@ -11,9 +11,9 @@ import SwiftUI
 struct IvyApp: App {
     var body: some Scene {
         WindowGroup {
-            //LoginView()
-            //image()
-            grids()
+//            ContentView()
+//           OnbordingView()
+            MainTabView()
         }
     }
 }

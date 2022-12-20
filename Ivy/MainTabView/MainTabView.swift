@@ -32,17 +32,17 @@ struct MainTabView: View {
 
                 }.tag(1)
             
-            Notification()
-                .onTapGesture {
-                    self.selectedIndex = 2
-                }
-                .tabItem{
-                    Image(systemName: "bell")
-                    Text("Notification")
-
-                }.tag(2)
+//            Notification()
+//                .onTapGesture {
+//                    self.selectedIndex = 2
+//                }
+//                .tabItem{
+//                    Image(systemName: "bell")
+//                    Text("Notification")
+//
+//                }.tag(2)
             
-            LoginView()
+            ProfileView()
                 .onTapGesture {
                     self.selectedIndex = 3
                 }
@@ -52,10 +52,16 @@ struct MainTabView: View {
 
                 }.tag(3)
         }
+       
         //من هنا نغير اللون و الخلفية
         .accentColor(Color("ourgreen"))
         .background(.thinMaterial)
-
+        .onAppear {
+            let tabBarAppearance = UITabBarAppearance()
+            tabBarAppearance.configureWithDefaultBackground()
+            UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+            
+        }
 
 
     }
