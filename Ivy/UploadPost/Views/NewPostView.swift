@@ -40,7 +40,7 @@ struct NewPostView: View {
             }
             .padding()
             .fullScreenCover(isPresented: $PostNewPost) {
-                FeedView()
+                MainTabView()
             }
 
             

@@ -95,7 +95,7 @@ struct FeedView: View {
     
     struct FeedView_Previews: PreviewProvider {
         static var previews: some View {
-            FeedView()
+            MainTabView()
                 .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color("ouroffwhite")/*@END_MENU_TOKEN@*/)
         }
     }
