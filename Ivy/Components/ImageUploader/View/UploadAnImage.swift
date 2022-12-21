@@ -7,36 +7,48 @@
 import SwiftUI
 
 struct UploadAnImage: View {
-    
-    @State private var image = UIImage()
-    @State private var showSheet = false
+    @State var isPickerShowing = false
+    @State var selectedImage: UIImage?
+
+//    @State private var image = UIImage()
+//    @State private var showSheet = false
     
     var body: some View {
-        HStack {
-            Image(uiImage: self.image)
-                .resizable()
-                .frame(width: 300, height: 200)
-                .background(Color.black.opacity(0.2))
-                .aspectRatio(contentMode: .fill)
-//                .clipShape(RoundedRectangle(cornerSize: 15))
-          
-//            Text("Add Photo")
-//                .font(.headline)
-//                .frame(maxWidth: .infinity)
-//                .frame(height: 50)
-//                .background(Color("ourgreen"))
-//                .cornerRadius(16)
-//                .foregroundColor(Color("ouroffwhite"))
-//                .padding(.horizontal, 20)
-                .onTapGesture {
-                    showSheet = true
+//    HStack {
+//            Image(uiImage: self.image)
+//                .resizable()
+//                .frame(width: 300, height: 200)
+//                .background(Color.black.opacity(0.2))
+//                .aspectRatio(contentMode: .fill)
+//                .onTapGesture {
+//                    showSheet = true
+//                }
+//        }
+//        .padding(.horizontal, 20)
+//        .sheet(isPresented: $showSheet) {
+//            // Pick an image from the photo library:
+//            ImagePicker(sourceType: .photoLibrary, selectedImage: self.$image)
+
+            VStack {
+                if selectedImage != nil {
+                    
+                    Image (uiImage: selectedImage!)
+                    
+                        .resizable ()
+                        .frame (width: 200, height: 200)
                 }
-        }
-        .padding(.horizontal, 20)
-        .sheet(isPresented: $showSheet) {
-            // Pick an image from the photo library:
-            ImagePicker(sourceType: .photoLibrary, selectedImage: self.$image)
+                    Button {
+                        // Show the image picker
+                        isPickerShowing = true
+                    } label: {
+                        Text ("Add a Photo" )
+                            .foregroundColor(Color("ourgreen"))
+                    }
+                }
+            .sheet(isPresented: $isPickerShowing, onDismiss: nil) {
+            // Image picker
             
+                ImagePicker (selectedImage: $selectedImage, isPickerShowing: $isPickerShowing)
             //  If you wish to take a photo from camera instead:
             // ImagePicker(sourceType: .camera, selectedImage: self.$image)
         }

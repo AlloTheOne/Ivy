@@ -19,12 +19,30 @@ struct FeedView: View {
                 .ignoresSafeArea()
             
             VStack{
-//                search_bar_tool()
-//                    .frame( height: 100)
-                SearchBar()
-//                    .padding()
-//                   .frame( height: 42)
-
+                
+                HStack{
+                    Spacer()
+                    //                search_bar_tool()
+                    //                    .frame( height: 100)
+                    Searchbar2()
+                    //                    .padding()
+//                                       .frame( width: 300)
+                    Button{
+                        ShowNewPostView.toggle()
+                    }label:{
+                        Image("plus.app.fill")
+                            .renderingMode(.original)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 45, height: 40)
+                            .foregroundColor(Color("ourdarkgray"))
+                    }
+                    //.padding()
+                    .fullScreenCover(isPresented: $ShowNewPostView) {
+                        NewPostView()
+                    }
+                }.padding(.horizontal)
+                
                 VStack{
                 HStack{
                     ForEach(PostFilterViewModel.allCases, id: \.rawValue){ item in
@@ -67,25 +85,9 @@ struct FeedView: View {
                             
                         }
                     }
-                    
-                    Button{
-                        ShowNewPostView.toggle()
-                    }label:{
-                        Image("plus.bubble.fill")
-                            .renderingMode(.original)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 70, height: 70)
-                            .foregroundColor(Color("ourdarkgray"))
-                            .padding()
-                    }
-                    .padding()
-                    .fullScreenCover(isPresented: $ShowNewPostView) {
-                        NewPostView()
-                        
-                    }
-                }
-            }
+                }.padding(.horizontal)
+            }          //          .padding()
+
             }
         }
     
@@ -95,7 +97,7 @@ struct FeedView: View {
     
     struct FeedView_Previews: PreviewProvider {
         static var previews: some View {
-            MainTabView()
+            FeedView()
                 .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color("ouroffwhite")/*@END_MENU_TOKEN@*/)
         }
     }
