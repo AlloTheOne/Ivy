@@ -34,7 +34,7 @@ struct PostsRawView: View {
                                 .foregroundColor(Color("ourlightgray"))
                         }
                     }
-                    .padding()
+                    .padding(.vertical)
 
                     VStack{
                         //post

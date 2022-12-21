@@ -54,6 +54,7 @@ struct FeedView: View {
                                 }
                         .pickerStyle(.segmented)
                         .foregroundColor(Color("ourgreen"))
+                        .padding(.horizontal)
 
 
                     

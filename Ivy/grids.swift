@@ -55,7 +55,7 @@ struct grids: View {
                         ForEach(0..<6) {index in
                             HStack(alignment: .center){
                                 ZStack (alignment: .bottom){
-                                    RoundedRectangle(cornerRadius: 7)
+                                    RoundedRectangle(cornerRadius: 15)
                                         .frame(width: 150, height: 150)
                                         .foregroundColor(Color("ourwhite"))
                                     VStack {
