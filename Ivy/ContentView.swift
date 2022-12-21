@@ -34,7 +34,7 @@ struct ContentView: View {
                         Rectangle()
                             .fill(Color("ourgreen"))
                             .frame(width: 350, height: 1)
-                            .padding(.bottom, 40)
+                            .padding(.bottom )
                         
                         
                         
