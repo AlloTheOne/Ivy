@@ -10,166 +10,172 @@ import SwiftUI
 struct SettingView: View {
     @State private var ContentView = false
     @State private var Language = true
-    @State private var Mode = false
+//    @State private var Mode = false
+    @AppStorage("isDarkMode") private var isDarkMode = false
+
     @State var showpopscrean: Bool = false
     var body: some View {
         NavigationView{
-            VStack{
+            ZStack{
+                Color("ouroffwhite")
+                    .ignoresSafeArea()
                 
-                
-                Text("Setting")
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .foregroundColor(Color.gray)
-                    .padding(.bottom, 55.0)
-                    .padding(.trailing, 209.0)
-                    .opacity(1)
-                
-                VStack(alignment: .leading, spacing: 24){
+                VStack(alignment: .leading){
                     
-                    //اللغة
-                    HStack{
-                        Image(systemName: "globe")
-                            .font(.system(size: 20))
-                            .foregroundColor(Color("ourlightgreen"))
+                    
+                    Text("Setting")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.gray)
+                        .padding(.bottom, 55.0)
+                        .padding(.trailing, 209.0)
+                        .opacity(1)
+                    
+                    VStack(alignment: .leading, spacing: 24){
                         
-                        Toggle(isOn: $Language) {
-                            Text("Language")
+                        //اللغة
+//                        HStack{
+//                            Image(systemName: "globe")
+//                                .font(.system(size: 20))
+//                                .foregroundColor(Color("ourgreen"))
+//
+//                            Toggle(isOn: $Language) {
+//                                Text("Language")
+//                                    .font(.system(size: 22))
+//                                    .foregroundColor(Color("ourgreen"))
+//                            }
+//
+//
+//                            //الدارك و اللايت
+//                        }
+//                        HStack{
+//                            Image(systemName: "moon.circle")
+//                                .font(.system(size: 22))
+//                                .foregroundColor(Color("ourgreen"))
+//                            Toggle(isOn: $isDarkMode) {
+//                                Text("Mode")
+//                                    .font(.system(size: 22))
+//                                    .foregroundColor(Color("ourgreen"))
+//                            }
+//                        }
+                        
+                        
+                        //عنا
+                        HStack{
+                            Image(systemName: "leaf.circle")
                                 .font(.system(size: 22))
                                 .foregroundColor(Color("ourgreen"))
-                        }
-                        
-                        
-                        //الارك و اللايت
-                    }
-                    HStack{
-                        Image(systemName: "moon.circle")
+                            NavigationLink(destination: Ivy.About()) {
+                                Text("About us")
+                            }
                             .font(.system(size: 22))
-                            .foregroundColor(Color("ourlightgreen"))
-                        Toggle(isOn: $Mode) {
-                            Text("Mode")
-                                .font(.system(size: 22))
-                                .foregroundColor(Color("ourgreen"))
-                        }
-                    }
-                    
-                    
-                    //عنا
-                    HStack{
-                        Image(systemName: "leaf.circle")
-                            .font(.system(size: 22))
-                            .foregroundColor(Color("ourlightgreen"))
-                        NavigationLink(destination: Ivy.About()) {
-                            Text("About us")
-                        }
-                        .font(.system(size: 22))
-                        .foregroundColor(Color("ourgreen"))
-                        
-                    }
-                    
-                    //شير
-                    HStack{
-                        
-                        Image(systemName: "square.and.arrow.up.circle")
-                            .font(.system(size: 22))
-                            .foregroundColor(Color("ourlightgreen"))
-                        //                    Text("Share App")
-                        Button(action: {
-                            share()
-                        }) {
-                            Text("Share App")
-                                .font(.system(size: 22))
-                                .foregroundColor(Color("ourgreen"))
+                            .foregroundColor(Color("ourgreen"))
                             
                         }
                         
-                        
-                    }
-                    
-                    //السريه
-                    HStack{
-                        Image(systemName: "lock.circle")
-                            .font(.system(size: 22))
-                            .foregroundColor(Color("ourlightgreen"))
-                        
-                        NavigationLink(destination: PolicyUIView() ) {
-                            Text("Privacy Policy")
-                        }
-                        .font(.system(size: 22))
-                        .foregroundColor(Color("ourgreen"))
-                        
-                        
-                    }
-                    
-                    //تسجيل خروج
-                    HStack{
-                        Menu {
+                        //شير
+                        HStack{
                             
-                            Button("Cancel", role: .destructive) {
-                                // Do something
+                            Image(systemName: "square.and.arrow.up.circle")
+                                .font(.system(size: 22))
+                                .foregroundColor(Color("ourgreen"))
+                            //                    Text("Share App")
+                            Button(action: {
+                                share()
+                            }) {
+                                Text("Share App")
+                                    .font(.system(size: 22))
+                                    .foregroundColor(Color("ourgreen"))
+                                
                             }
                             
                             
-                            Button {
-                                ContentView.toggle()
-                                // Do something
-                            } label: {
+                        }
+                        
+                        //السريه
+                        HStack{
+                            Image(systemName: "lock.circle")
+                                .font(.system(size: 22))
+                                .foregroundColor(Color("ourgreen"))
+                            
+                            NavigationLink(destination: PolicyUIView() ) {
+                                Text("Privacy Policy")
+                            }
+                            .font(.system(size: 22))
+                            .foregroundColor(Color("ourgreen"))
+                            
+                            
+                        }
+                        
+                        //تسجيل خروج
+                        HStack{
+                            Menu {
                                 
+                                Button("Cancel", role: .destructive) {
+                                    // Do something
+                                }
+                                
+                                
+                                Button {
+                                    ContentView.toggle()
+                                    // Do something
+                                } label: {
+                                    
+                                    Label("Log out", systemImage: "arrow.right.circle")
+                                    
+                                }.padding()
+                                
+                                
+                                Text("Are you sure to sign out of the account?")
+                            } label: {
                                 Label("Log out", systemImage: "arrow.right.circle")
                                 
-                            }.padding()
+                                    .font(.system(size: 22))
+                                    .foregroundColor(Color("ourgreen"))
+                            }
                             
-                            
-                            Text("Are you sure to sign out of the account?")
-                        } label: {
-                            Label("Log out", systemImage: "arrow.right.circle")
-                            
-                                .font(.system(size: 22))
-                                .foregroundColor(Color("ourgreen"))
+                        }
+                        //حذف حساب
+                        HStack{
+                            Menu {
+                                
+                                Button("Cancel", role: .destructive) {
+                                    
+                                }
+                                Button {
+                                    ContentView.toggle()
+                                } label: {
+                                    
+                                    Label("Delete Account", systemImage: "arrow.right.circle")
+                                }
+                                Text("Are you sure to Delete your Account ?")
+                            } label: {
+                                Label("Delete Account", systemImage: "xmark.bin.circle")
+                                    .font(.system(size: 22))
+                                    .foregroundColor(Color("ourred"))
+                            }
                         }
                         
                     }
-                    //حذف حساب
-                    HStack{
-                        Menu {
-                            
-                            Button("Cancel", role: .destructive) {
-                                
-                            }
-                            Button {
-                                ContentView.toggle()
-                            } label: {
-                                
-                                Label("Delete Account", systemImage: "arrow.right.circle")
-                            }
-                            Text("Are you sure to Delete your Account ?")
-                        } label: {
-                            Label("Delete Account", systemImage: "xmark.bin.circle")
-                                .font(.system(size: 22))
-                                .foregroundColor(Color("ourred"))
-                        }
+                    
+                    
+                 Spacer()
+                    
+                }
+                   
+                
+                    .fullScreenCover(isPresented: $ContentView) {
+                        Ivy.ContentView()
+                        
+                        // .fullScreenCover(isPresented: $About) {
+                        //   Ivy.About()
+                        
                     }
-                    
-                }.padding(.leading, 35.0)
                 
                 
-                
-                
-            }.padding(.bottom, 200.0)
-                .padding(.trailing, 38.0)
-            
-                .fullScreenCover(isPresented: $ContentView) {
-                    Ivy.ContentView()
-                    
-                       // .fullScreenCover(isPresented: $About) {
-                         //   Ivy.About()
-                            
-                        }
-                
-            
+            }
         }
-        }
-        
+    }
         
         
         
@@ -193,4 +199,3 @@ struct SettingView: View {
             
         }
     }
-
