@@ -85,7 +85,7 @@ struct PostsRawView: View {
               
             }
             .padding(.bottom, 5)
-            .foregroundColor(Color("ourlightgray"))
+            .foregroundColor(Color("ourgreen"))
             Divider()
 
         }

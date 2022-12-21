@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct FeedView: View {
+    
+    var Filter = ["Trending", "Latest"]
+    @State private var selectedtab = "Trending"
     @State private var ShowNewPostView = false
     @State private var selectedFilter: PostFilterViewModel = .trending
     @Namespace var animation
@@ -44,36 +47,46 @@ struct FeedView: View {
                 }.padding(.horizontal)
                 
                 VStack{
-                HStack{
-                    ForEach(PostFilterViewModel.allCases, id: \.rawValue){ item in
-                        VStack{
-                            Text(item.title)
-                                .foregroundColor(Color("ourgreen"))
-                                .font(.headline)
-                                .fontWeight(selectedFilter == item ? .semibold: .regular)
-                            //   .foregroundColor(selectedFilter == item .black,: .gray)
-                            if selectedFilter == item {
-                                Capsule()
-                                    .foregroundColor(Color("ourgreen"))
-                                    .frame(height: 3)
-                                    .matchedGeometryEffect(id: "filter", in: animation)
-                                
-                            } else {
-                                Capsule()
-                                    .foregroundColor(Color(.clear))
-                                    .frame(height: 3)
-                            }
-                        }
-                        .onTapGesture {
-                            withAnimation(.easeInOut){
-                                self.selectedFilter = item
-                            }
-                        }
-                    }
+                                Picker("Please choose a filter", selection: $selectedtab) {
+                                    ForEach(Filter, id: \.self) {
+                                        Text($0)
+                                    }
+                                }
+                        .pickerStyle(.segmented)
+                        .foregroundColor(Color("ourgreen"))
+
+
                     
-                }
+//                HStack{
+//                    ForEach(PostFilterViewModel.allCases, id: \.rawValue){ item in
+//                        VStack{
+//                            Text(item.title)
+//                                .foregroundColor(Color("ourgreen"))
+//                                .font(.headline)
+//                                .fontWeight(selectedFilter == item ? .semibold: .regular)
+//                            //   .foregroundColor(selectedFilter == item .black,: .gray)
+//                            if selectedFilter == item {
+//                                Capsule()
+//                                    .foregroundColor(Color("ourgreen"))
+//                                    .frame(height: 3)
+//                                    .matchedGeometryEffect(id: "filter", in: animation)
+//
+//                            } else {
+//                                Capsule()
+//                                    .foregroundColor(Color(.clear))
+//                                    .frame(height: 3)
+//                            }
+//                        }
+//                        .onTapGesture {
+//                            withAnimation(.easeInOut){
+//                                self.selectedFilter = item
+//                            }
+//                        }
+//                    }
+//
+//                }
                 
-                .overlay(Divider() .offset (x: 0 ,y: 20))
+//                .overlay(Divider() .offset (x: 0 ,y: 20))
                 
                 ZStack (alignment: .bottomTrailing){
                     ScrollView{

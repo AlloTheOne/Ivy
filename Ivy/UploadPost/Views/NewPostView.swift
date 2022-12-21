@@ -22,7 +22,6 @@ struct NewPostView: View {
                 } label: {
                     Text("Cancel")
                         .foregroundColor(Color("ourgreen"))
-
                 }
                 Spacer()
                 
@@ -44,77 +43,57 @@ struct NewPostView: View {
             }
 
             
-            HStack(alignment: .top){
-                Circle()
-                    .frame(width: 70, height: 70)
+            VStack(alignment: .leading){
+                
+                HStack(alignment: .center, spacing: 12){
+                        Circle()
+                        .frame(width: 70, height: 70)
+                        .foregroundColor(Color("ourdarkgray"))
+                    //User info + Post
+                    VStack (alignment: .leading, spacing: 4){
+                        //user infor
+                        VStack (alignment: .leading){
+                            Text("Dreamers")
+                                .font(.subheadline).bold()
+                                .foregroundColor(Color("ourdarkgray"))
+                            
+                            HStack {
+                                Text("@dreamers")
+                                    .font(.caption)
+                                    .foregroundColor(Color("ourlightgray"))
+                                
+                            }
+                            }
+                        }
+                }.padding(.horizontal)
+
+//                Circle()
+//                    .frame(width: 80, height: 80)
+                
+                
+                
+                
+//                TextEditor(text: $caption)
+//                    .border(/*@START_MENU_TOKEN@*/Color.gray/*@END_MENU_TOKEN@*/, width: 1)
+//                    .frame(width: 250, height: 300)
+//                    .foregroundColor(self.caption == "Hello" ? .gray : .primary)
+//                    .padding(.horizontal)
+//                    .navigationTitle("Hello")
+//                    .onTapGesture {
+//                        if self.caption == "Hello" {
+//                            self.caption = ""
+//                        }
+//                    }
                 
             TextArea("Hello?", text: $caption)
+                    .frame(width: 350, height: 200)
+                    .padding()
+                
+
                 
             }
             .padding()
-            
-//            VStack{
-//                VStack {
-//                    if selectedImage != nil {
-//                        Image(uiImage: selectedImage! )
-//                            .resizable()
-//                            .frame(width: 350 ,height: 350)
-//                            .cornerRadius(40)
-//                            .padding(.trailing, 2.0)
-//
-//
-//                    }
-//                    else {
-//
-//
-//                        Image("Pic1")
-//                            .resizable()
-//                            .frame(width: 350 ,height: 350)
-//                            .cornerRadius(40)
-//                            .padding()
-//                    }
-//                }
-//
-//
-//                VStack{
-//                    Button {
-//                        ispickerShowing = true
-//
-//
-//                    } label: {
-//
-//                        HStack {
-//
-//                            Image(systemName: "ourgreen")
-//
-//                                .font(.system(size:20))
-//                                .foregroundColor(.white)
-//                                .padding([.vertical,.leading])
-//                            Text("picture")
-//                                .font(.headline)
-//                                .foregroundColor(.white)
-//                                .frame(width: 100, height: 40)
-//
-//
-//                        }.frame(width: 170,height: 40).background(Color("ourwhite"))
-//
-//                            .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
-//
-//
-//                            .sheet(isPresented:$ispickerShowing, onDismiss: nil){
-//                                //            image picker
-//                                ImagePicker(selectedImage: $selectedImage , isPickerShowing: $ispickerShowing)
-//
-//
-//                            }
-//
-//                    }
-//
-//
-//
-//                    }
-//            }
-            
+
             UploadAnImage()
             
             Spacer()
@@ -126,5 +105,4 @@ struct NewPostView_Previews: PreviewProvider {
     static var previews: some View {
         NewPostView()
     }
-    
 }
