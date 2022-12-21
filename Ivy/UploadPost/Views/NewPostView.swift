@@ -124,6 +124,21 @@ struct NewPostView: View {
             Spacer()
         }
     }
+//    func addFeed(){
+//    let record = CKRecord(recordType: "Feel")
+//        record["text"] = self.text
+//    record["imgURL"] = "Kuddah"
+//    record["Major"] = "Developer"
+//    record["age"] = 20
+//
+//        CKContainer.init(identifier: "iCloud.example.com.Cloudkitt").publicCloudDatabase.save(record){
+//            record, error in
+//            guard error == nil else{
+//                print("EEERRRROOOOR\(error?.localizedDescription)")
+//                return
+//            }
+//        }
+//    }
 }
 
 struct NewPostView_Previews: PreviewProvider {

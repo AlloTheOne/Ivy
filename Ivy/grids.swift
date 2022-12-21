@@ -40,7 +40,7 @@ struct grids: View {
                 
     ]
     
-    let array = ["Volunteering" , "Plastic Reduction" , "Sustainable" , "Recycling"  , "Planting" , "Safe Energy"]
+    let array = ["Volunteering", "Plastic Reduction" , "Sustainable" , "Recycling"  , "Planting" , "Safe Energy"]
     
     var body: some View {
         ZStack{
@@ -66,6 +66,7 @@ struct grids: View {
                                     }
                                     
                                     Button(action: {
+                                        //ننادي الداتابايس و نضيف على البوينت المعينة قيمة gained + 10 
                                         self.showPopup = true
                                     }) {
                                         

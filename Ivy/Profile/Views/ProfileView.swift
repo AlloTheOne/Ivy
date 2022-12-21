@@ -40,7 +40,11 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        ZStack{
+            Color("ouroffwhite")
+                .ignoresSafeArea()
+            ProfileView()
+        }
     }
 }
 //(alignment: .bottomLeading)
@@ -115,13 +119,13 @@ extension ProfileView{
         VStack(alignment: .leading ,spacing: 4){
             Text("Jomana Khaed")
                 .font(.title2).bold()
-                .foregroundColor(Color("ourgreen"))
+                .foregroundColor(Color("ourdarkgray"))
             Text("@jomanakhaled")
                 .font(.subheadline)
                 .foregroundColor(Color("ourlightgray"))
             Text("lets provide healthy environment for us and the new generation")
                 .font(.subheadline).bold()
-                .foregroundColor(Color("ourlightgreen"))
+                .foregroundColor(Color("ourdarkgray"))
                 .padding(.vertical)
         }
         .offset( y: 80)
@@ -178,14 +182,15 @@ extension ProfileView{
             HStack{
                 //Spacer()
                 Text("Total Points :")
-                    .font(.title).bold()
-                    .foregroundColor(Color("ourlightgreen"))
+                    .font(.title2).bold()
+                    .foregroundColor(Color("ourgreen"))
                 Spacer()
                 Text("\(points[0][0]+points[1][0]+points[2][0]+points[3][0])")
-                    .font(.title).bold()
-                    .foregroundColor(Color("ourlightgreen"))
+                    .font(.title2).bold()
+                    .foregroundColor(Color("ourgreen"))
                 //Spacer()
-            }.padding()
+            }
+            .padding(.top)
                 .padding(.horizontal)
             ScrollView{
                 LazyVStack{
@@ -194,10 +199,10 @@ extension ProfileView{
                             HStack{
                                 Text("Habit No\(index+1)")
                                     .font(.title3).bold()
-                                    .foregroundColor(Color("ourgreen"))
+                                    .foregroundColor(Color("ourdarkgray"))
                                 Text("\(points[index][0])/\(points[index][1])")
                                     .font(.subheadline).italic()
-                                    .foregroundColor(Color("ourlightgreen"))
+                                    .foregroundColor(Color("ourgreen"))
                                 Spacer()
                             }
                             ProgressView( value: Double(points[index][0]),
