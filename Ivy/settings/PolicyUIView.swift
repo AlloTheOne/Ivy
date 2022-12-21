@@ -26,8 +26,8 @@ struct PolicyUIView: View {
                     .font(.caption)
                     .foregroundColor(Color("ourdarkgray"))
                     .padding()
-                
-            }.padding(.bottom, 90.0)
+            Spacer()
+            }
             
         }
     }

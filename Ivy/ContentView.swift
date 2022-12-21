@@ -16,36 +16,38 @@ struct ContentView: View {
             
             ZStack{
                 VStack {
-                    search_bar_tool()
-                        .frame( height: 150)
-                    
+//                    search_bar_tool()
+//                        .frame( height: 150)
+                    SearchBar()
+                        .padding(.top, 50)
+                      //  .frame( height: 150)
                     // VStack {
-                    
-                    Rectangle()
-                        .fill(Color("ourgreen"))
-                        .frame(width: 350, height: 1)
-                    Text("What eco-friendly habits have you accomplished today?")
-                        .foregroundColor(Color("ourgreen"))
-                    
-                        .multilineTextAlignment(.center)
-                       // .padding(.bottom, 10)
-                    Rectangle()
-                        .fill(Color("ourgreen"))
-                        .frame(width: 350, height: 1)
-                        .padding(.bottom, 40)
-                    
-                    
-                    
-                    grids()
-                    Spacer()
-                    
+                    ScrollView {
+                        Rectangle()
+                            .fill(Color("ourgreen"))
+                            .frame(width: 350, height: 1)
+                        Text("What eco-friendly habits have you accomplished today?")
+                            .foregroundColor(Color("ourgreen"))
+                        
+                            .multilineTextAlignment(.center)
+                        // .padding(.bottom, 10)
+                        Rectangle()
+                            .fill(Color("ourgreen"))
+                            .frame(width: 350, height: 1)
+                            .padding(.bottom, 40)
+                        
+                        
+                        
+                        grids()
+                        //                    Spacer()
+                    }
                     
                     
                     
                     
                     
                 }
-                // .padding(.top)
+                
             }
         }   .ignoresSafeArea()
 
@@ -56,7 +58,7 @@ struct ContentView: View {
     
     struct ContentView_Previews: PreviewProvider {
         static var previews: some View {
-            ContentView()
+            MainTabView()
             
         }
     }

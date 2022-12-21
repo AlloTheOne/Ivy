@@ -8,10 +8,14 @@
 import SwiftUI
 
 struct FeedView: View {
+
+    var Filter = ["Trending", "Latest"]
+    @State private var selectedtab = "Trending"
     @State private var ShowNewPostView = false
     @State private var selectedFilter: PostFilterViewModel = .trending
     @Namespace var animation
     var body: some View {
+        
         
         
         ZStack {
@@ -19,43 +23,72 @@ struct FeedView: View {
                 .ignoresSafeArea()
             
             VStack{
-//                search_bar_tool()
-//                    .frame( height: 100)
-                SearchBar()
-//                    .padding()
-//                   .frame( height: 42)
-
-                VStack{
-                HStack{
-                    ForEach(PostFilterViewModel.allCases, id: \.rawValue){ item in
-                        VStack{
-                            Text(item.title)
-                                .foregroundColor(Color("ourgreen"))
-                                .font(.headline)
-                                .fontWeight(selectedFilter == item ? .semibold: .regular)
-                            //   .foregroundColor(selectedFilter == item .black,: .gray)
-                            if selectedFilter == item {
-                                Capsule()
-                                    .foregroundColor(Color("ourgreen"))
-                                    .frame(height: 3)
-                                    .matchedGeometryEffect(id: "filter", in: animation)
-                                
-                            } else {
-                                Capsule()
-                                    .foregroundColor(Color(.clear))
-                                    .frame(height: 3)
-                            }
-                        }
-                        .onTapGesture {
-                            withAnimation(.easeInOut){
-                                self.selectedFilter = item
-                            }
-                        }
-                    }
-                    
-                }
                 
-                .overlay(Divider() .offset (x: 0 ,y: 20))
+                HStack{
+                    Spacer()
+                    //                search_bar_tool()
+                    //                    .frame( height: 100)
+                    Searchbar2()
+                    //                    .padding()
+//                                       .frame( width: 300)
+                    Button{
+                        ShowNewPostView.toggle()
+                    }label:{
+                        Image("plus.app.fill")
+                            .renderingMode(.original)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 45, height: 40)
+                            .foregroundColor(Color("ourdarkgray"))
+                    }
+                    //.padding()
+                    .fullScreenCover(isPresented: $ShowNewPostView) {
+                        NewPostView()
+                    }
+                }.padding(.horizontal)
+                
+                VStack{
+                                Picker("Please choose a filter", selection: $selectedtab) {
+                                    ForEach(Filter, id: \.self) {
+                                        Text($0)
+                                    }
+                                }
+                        .pickerStyle(.segmented)
+                        .foregroundColor(Color("ourgreen"))
+                        .padding(.horizontal)
+
+
+                    
+//                HStack{
+//                    ForEach(PostFilterViewModel.allCases, id: \.rawValue){ item in
+//                        VStack{
+//                            Text(item.title)
+//                                .foregroundColor(Color("ourgreen"))
+//                                .font(.headline)
+//                                .fontWeight(selectedFilter == item ? .semibold: .regular)
+//                            //   .foregroundColor(selectedFilter == item .black,: .gray)
+//                            if selectedFilter == item {
+//                                Capsule()
+//                                    .foregroundColor(Color("ourgreen"))
+//                                    .frame(height: 3)
+//                                    .matchedGeometryEffect(id: "filter", in: animation)
+//
+//                            } else {
+//                                Capsule()
+//                                    .foregroundColor(Color(.clear))
+//                                    .frame(height: 3)
+//                            }
+//                        }
+//                        .onTapGesture {
+//                            withAnimation(.easeInOut){
+//                                self.selectedFilter = item
+//                            }
+//                        }
+//                    }
+//
+//                }
+                
+//                .overlay(Divider() .offset (x: 0 ,y: 20))
                 
                 ZStack (alignment: .bottomTrailing){
                     ScrollView{
@@ -67,25 +100,9 @@ struct FeedView: View {
                             
                         }
                     }
-                    
-                    Button{
-                        ShowNewPostView.toggle()
-                    }label:{
-                        Image("plus.bubble.fill")
-                            .renderingMode(.original)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 70, height: 70)
-                            .foregroundColor(Color("ourdarkgray"))
-                            .padding()
-                    }
-                    .padding()
-                    .fullScreenCover(isPresented: $ShowNewPostView) {
-                        NewPostView()
-                        
-                    }
-                }
-            }
+                }.padding(.horizontal)
+            }          //          .padding()
+
             }
         }
     

@@ -10,7 +10,11 @@ import SwiftUI
 struct grids: View {
  
     @State var gridLayout: [GridItem] = [ GridItem() ]
-    @State private var showPopup = false
+    @State private var showPopup: Bool = false
+    @State private var showingAlert1 = false
+    @State private var showPopover: Bool = false
+    @State private var showingAlert2 = false
+    
     private let adaptiveColumns = [
         GridItem(.adaptive(minimum: 150))
 
@@ -36,75 +40,74 @@ struct grids: View {
                 
     ]
     
-    let array = ["Volunteering" , "Plastic Reduction" , "Sustainable" , "Recycling"  , "Planting" , "Safe Energy"]
+    let array = ["Volunteering", "Plastic Reduction" , "Sustainable" , "Recycling"  , "Planting" , "Safe Energy"]
     
     var body: some View {
-        LazyVGrid(columns: adaptiveColumns, spacing: 30)  {
-//            ForEach(samplePhotos.indices, id: \.self) { index in
-//
-//                Image(samplePhotos[index].name)
-//                    .resizable()
-//                    .scaledToFill()
-//
-                ForEach(0..<6) {index in
-                    HStack(alignment: .center){
-                        
-                       
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 7)
-                                .frame(width: 150, height: 150)
-                                .foregroundColor(Color("ourwhite"))
-                            VStack {
-                                Image("pic\(index)")
-                                    .resizable()
-                                    .frame(width:90 ,height: 90)
-                                
-                                Text(array[index])
-                            }
-                            
-                            Button(action: {
-                                self.showPopup = true
-                            }) {
-                                Image(systemName: "plus")
-                                    .foregroundColor(Color.red)
-
-                                    .frame(width: 30, height: 30)
-                                   .padding(.bottom, 160)
-                                    .padding(.leading, 140)
-                            }
-                            
-                            
-                            .alert(isPresented: $showPopup) {
-                                Alert(title: Text("Popup Message"), message: Text("This is a popup message"), dismissButton: .default(Text("OK")))
+        ZStack{
+            Color("ouroffwhite")
+                .ignoresSafeArea()
+            ZStack{
+                if(showPopup){
+                    
+                    PopUpWindow(title: "Error", message: "Sorry, that email address is already used!", buttonText: "OK", showPopover: $showPopup , showPopup: $showPopup)
+                } else{
+                    LazyVGrid(columns: adaptiveColumns, spacing: 30)  {
+                        ForEach(0..<6) {index in
+                            HStack(alignment: .center){
+                                ZStack (alignment: .bottom){
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .frame(width: 150, height: 150)
+                                        .foregroundColor(Color("ourwhite"))
+                                    VStack {
+                                        Image("pic\(index)")
+                                            .resizable()
+                                            .frame(width:90 ,height: 90)
+                                        Text(array[index])
+                                    }
+                                    
+                                    Button(action: {
+                                        //ننادي الداتابايس و نضيف على البوينت المعينة قيمة gained + 10 
+                                        self.showPopup = true
+                                    }) {
+                                        
+                                        ZStack{
+                                            Image(systemName: "circle")
+                                                .frame(width: 30, height: 30)
+                                                .foregroundColor(Color("ourwhite"))
+                                                .background(Color("ourwhite"))
+                                                .clipShape(Circle())
+                                                .padding(.bottom, 115)
+                                                .padding(.leading, 133)
+                                                .shadow(radius: 3, x: -2, y: 2)
                                             
-                        }
-                            Image(systemName: "oval")
-                                .frame(width: 30, height: 30)
-                                .foregroundColor(.white)
-                              // .background(Color.white)
-                                .clipShape(Circle())
-                                .padding(.bottom, 160)
-                                .padding(.leading, 140)
+                                            Image(systemName: "plus")
+                                            //                                    .foregroundColor(Color("ourgreen"))
+                                                .foregroundColor(Color("ourred"))
+                                                .frame(width: 50, height: 50)
+                                                .padding(.bottom, 115)
+                                                .padding(.leading, 133)
+                                        }
+                                    }
+                                    
+                                    
+                                    //                            .shadow(radius: )
+                                }
+                            }
                             
-//                            Image(systemName: "plus")
-//                                .foregroundColor(Color.red)
-//
-//                                .frame(width: 30, height: 30)
-//                                .padding(.bottom, 160)
-//                                .padding(.leading, 140)
-
+                            .padding(.horizontal)
+                            
                         }
+                        
+                        
+                        
+                        
                     }
-                    .padding(.horizontal)
-                   // .padding(.leading)
                 }
-                
             }
-        
+        }
     }
         struct grids_Previews: PreviewProvider {
             static var previews: some View {
-                
                 grids()
             }
         }
