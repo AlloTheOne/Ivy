@@ -14,26 +14,43 @@ struct ProfileView: View {
     @State var images = ["saveEarth", "energySaving", "ecoWater"]
     @State var points  = [[50,100], [20,100], [130,200], [90,100]]
 //    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-
+    @AppStorage("userId") var userId: String = ""
+    
+    private var isSignedIn: Bool {
+        !userId.isEmpty
+    }
+    
     var body: some View {
        
         VStack(alignment: .leading){
-            headerView
-            
-            userInfoDetails
+            if isSignedIn {
+                signInButtonView()
+            }
+            else {
+                //                    if let name = fetchUserName() {
+                //                          Text("Welcome, \(name)!")
+                //                        } else {
+                //                          Text("Please sign in to continue.")
+                //                        }
                 
-            tweetFilterBar
-            switch selectedFilter{
-            case .tweets:
-                pointsView
-            case .replies:
-                repliesView
-            case .likes:
-                tweetsView
+                headerView
+                
+                userInfoDetails
+                
+                tweetFilterBar
+                switch selectedFilter{
+                case .tweets:
+                    pointsView
+                case .replies:
+                    repliesView
+                case .likes:
+                    tweetsView
+                }
+                
+                
+                Spacer()
             }
             
-           
-            Spacer()
         }
     }
 }

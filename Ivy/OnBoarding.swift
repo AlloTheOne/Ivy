@@ -41,19 +41,16 @@ enum OnbordingType: CaseIterable {
 }
 
 struct OnbordingView: View {
-    
+    @AppStorage("shouldShowOnboarding") var shouldShowOnboarding: Bool = true
     var selectedOnbordingType: OnbordingType = .scan
-    
+    //@Environment(\.presentationMode) var presentaionMode
     
     var body: some View {
         ZStack {
             VStack {
-                
-                
                 TabView {
-                    
                     ForEach(OnbordingType.allCases, id: \.description) { onbording in
-                        SingleOnbording(onbordingType: onbording)
+                        SingleOnbording(onbordingType: onbording, shouldShowOnboarding: $shouldShowOnboarding)
                     }
                 }
                 .tabViewStyle(.page(indexDisplayMode: .always))
@@ -73,6 +70,7 @@ struct SingleOnbording: View {
     let onbordingType: OnbordingType
     @State private var showLogingPage = false
     @State private var showTabViewPage = false
+    @Binding var shouldShowOnboarding: Bool
     var body: some View {
         
         
@@ -101,6 +99,7 @@ struct SingleOnbording: View {
                     
                     Button("Get Started"){
                         showLogingPage.toggle()
+                        shouldShowOnboarding.toggle()
                     }
                     .font(.headline)
                     .padding()
@@ -117,8 +116,5 @@ struct SingleOnbording: View {
             .padding(.horizontal,40)
             
         }
-        
-
-        
     }
 
