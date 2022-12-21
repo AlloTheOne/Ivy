@@ -15,7 +15,7 @@ struct ProfileView: View {
     @State var points  = [[50,100], [20,100], [130,200], [90,100]]
 //    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @AppStorage("userId") var userId: String = ""
-    
+    @StateObject private var vm = CloudKitUserBootcampViewModel()
     private var isSignedIn: Bool {
         !userId.isEmpty
     }
@@ -66,6 +66,7 @@ struct ProfileView_Previews: PreviewProvider {
 }
 //(alignment: .bottomLeading)
 extension ProfileView{
+    
     var headerView: some View{
         ZStack{
             Color("ourlightgreen")
@@ -133,8 +134,11 @@ extension ProfileView{
     }
     
     var userInfoDetails: some View{
+        
+        
         VStack(alignment: .leading ,spacing: 4){
-            Text("Jomana Khaed")
+            //Text("Jomana Khaed")
+            Text("\(vm.userName)")
                 .font(.title2).bold()
                 .foregroundColor(Color("ourdarkgray"))
             Text("@jomanakhaled")
