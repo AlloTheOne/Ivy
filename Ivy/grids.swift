@@ -44,52 +44,63 @@ struct grids: View {
     
     var body: some View {
         ZStack{
-            if(showPopup){
-                
-                PopUpWindow(title: "Error", message: "Sorry, that email address is already used!", buttonText: "OK", showPopover: $showPopup , showPopup: $showPopup)
-            } else{
-        LazyVGrid(columns: adaptiveColumns, spacing: 30)  {
-            ForEach(0..<6) {index in
-                HStack(alignment: .center){
-                    ZStack (alignment: .bottom){
-                        RoundedRectangle(cornerRadius: 7)
-                            .frame(width: 150, height: 150)
-                            .foregroundColor(Color("ourwhite"))
-                        VStack {
-                            Image("pic\(index)")
-                                .resizable()
-                                .frame(width:90 ,height: 90)
-                            Text(array[index])
-                        }
-                        
-                        Button(action: {
-                            self.showPopup = true
-                        }) {
-                            
-                            Image(systemName: "plus")
-                                .foregroundColor(Color.red)
-                                .frame(width: 30, height: 30)
-                                .padding(.bottom, 160)
-                                .padding(.leading, 140)
-                        }
-                        
-                        Image(systemName: "oval")
-                            .frame(width: 30, height: 30)
-                            .foregroundColor(.white)
-                        // .background(Color.white)
-                            .clipShape(Circle())
-                            .padding(.bottom, 160)
-                            .padding(.leading, 140)
-                    }
-                }
-                
-                .padding(.horizontal)
-                
-            }
-            
-               
-                        
+            Color("ouroffwhite")
+                .ignoresSafeArea()
+            ZStack{
+                if(showPopup){
                     
+                    PopUpWindow(title: "Error", message: "Sorry, that email address is already used!", buttonText: "OK", showPopover: $showPopup , showPopup: $showPopup)
+                } else{
+                    LazyVGrid(columns: adaptiveColumns, spacing: 30)  {
+                        ForEach(0..<6) {index in
+                            HStack(alignment: .center){
+                                ZStack (alignment: .bottom){
+                                    RoundedRectangle(cornerRadius: 7)
+                                        .frame(width: 150, height: 150)
+                                        .foregroundColor(Color("ourwhite"))
+                                    VStack {
+                                        Image("pic\(index)")
+                                            .resizable()
+                                            .frame(width:90 ,height: 90)
+                                        Text(array[index])
+                                    }
+                                    
+                                    Button(action: {
+                                        self.showPopup = true
+                                    }) {
+                                        
+                                        ZStack{
+                                            Image(systemName: "circle")
+                                                .frame(width: 30, height: 30)
+                                                .foregroundColor(Color("ourwhite"))
+                                                .background(Color("ourwhite"))
+                                                .clipShape(Circle())
+                                                .padding(.bottom, 115)
+                                                .padding(.leading, 133)
+                                                .shadow(radius: 3, x: -2, y: 2)
+                                            
+                                            Image(systemName: "plus")
+                                            //                                    .foregroundColor(Color("ourgreen"))
+                                                .foregroundColor(Color("ourred"))
+                                                .frame(width: 50, height: 50)
+                                                .padding(.bottom, 115)
+                                                .padding(.leading, 133)
+                                        }
+                                    }
+                                    
+                                    
+                                    //                            .shadow(radius: )
+                                }
+                            }
+                            
+                            .padding(.horizontal)
+                            
+                        }
+                        
+                        
+                        
+                        
+                    }
                 }
             }
         }
