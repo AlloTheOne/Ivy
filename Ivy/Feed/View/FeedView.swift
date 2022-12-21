@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct FeedView: View {
-    
+
     var Filter = ["Trending", "Latest"]
     @State private var selectedtab = "Trending"
     @State private var ShowNewPostView = false
     @State private var selectedFilter: PostFilterViewModel = .trending
     @Namespace var animation
     var body: some View {
+        
         
         
         ZStack {

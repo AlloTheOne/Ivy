@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct NewPostView: View {
+    
+    @State var text = "Type here"
     @State var ispickerShowing = false
     @State var selectedImage: UIImage?
     @State private var PostNewPost = false
@@ -84,10 +86,33 @@ struct NewPostView: View {
 //                            self.caption = ""
 //                        }
 //                    }
-                
-            TextArea("Hello?", text: $caption)
-                    .frame(width: 350, height: 200)
-                    .padding()
+                TextEditor(text: self.$text)
+                            // make the color of the placeholder gray
+                            .foregroundColor(self.text == "Type here" ? .gray : .primary)
+                            
+                            .onAppear {
+
+                                // remove the placeholder text when keyboard appears
+                                NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { (noti) in
+                                    withAnimation {
+                                        if self.text == "Type here" {
+                                            self.text = ""
+                                        }
+                                    }
+                                }
+                                
+                                // put back the placeholder text if the user dismisses the keyboard without adding any text
+                                NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { (noti) in
+                                    withAnimation {
+                                        if self.text == "" {
+                                            self.text = "Type here"
+                                        }
+                                    }
+                                }
+                            }
+//            TextArea("Hello?", text: $caption)
+//                    .frame(width: 350, height: 200)
+//                    .padding()
                 
 
                 
