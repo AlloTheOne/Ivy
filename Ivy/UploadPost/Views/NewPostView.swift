@@ -14,6 +14,7 @@ struct NewPostView: View {
     @State var selectedImage: UIImage?
     @State private var PostNewPost = false
     @State private var caption = ""
+    @State private var onbordingAgain = false
     
     @Environment(\.presentationMode) var presentationMode
     var body: some View {
@@ -44,7 +45,7 @@ struct NewPostView: View {
             }
             .padding()
             .fullScreenCover(isPresented: $PostNewPost) {
-                MainTabView()
+                MainTabView(onbordingAgain: $onbordingAgain)
             }
             
             

@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
-
+import CloudKit
 struct ProfileView: View {
     @State private var GoToSting = false
     @State private var selectedFilter: TweetFilterViewModel = .tweets
+    @State var corentUser = ""
     @Namespace var animation
     @State var images = ["saveEarth", "energySaving", "ecoWater"]
     @State var points  = [[50,100], [20,100], [130,200], [90,100]]
@@ -23,16 +24,16 @@ struct ProfileView: View {
     var body: some View {
        
         VStack(alignment: .leading){
-            if isSignedIn {
-                signInButtonView()
-            }
-            else {
+//            if isSignedIn {
+//                signInButtonView()
+//            }
+//            else {
                 //                    if let name = fetchUserName() {
                 //                          Text("Welcome, \(name)!")
                 //                        } else {
                 //                          Text("Please sign in to continue.")
                 //                        }
-                
+//signInButtonView()
                 headerView
                 
                 userInfoDetails
@@ -49,9 +50,33 @@ struct ProfileView: View {
                 
                 
                 Spacer()
-            }
+         //   }
             
         }
+    }
+  //  View Model
+     func fetchUser(){
+        let container = CKContainer(identifier: "iCloud.com.thedreamers.ivy")
+        let predicateAll = NSPredicate(value: true)
+        let predicateJumana = NSPredicate(format: "name ==%@", "Jumana Khaled")
+        let query = CKQuery(recordType: "User", predicate: predicateAll)
+
+        let operations = CKQueryOperation(query: query)
+        operations.recordMatchedBlock = {  recordId, result in
+//            case .success( let records):
+//            let learner = Learner(record: records)
+//            self.learners.append(learner)
+            switch result {
+            case .success( let records):
+                let user = User(record: records)
+                self.corentUser =  "\(user.firstName) \(user.lastName)"
+                print("record: records")
+            case .failure( let error):
+                print(error.localizedDescription)
+                print("let error")
+            }
+        }
+        container.publicCloudDatabase.add(operations)
     }
 }
 

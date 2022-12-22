@@ -37,8 +37,10 @@ struct SIWASwiftUI: View {
                 
                 if !isSignedIn {
                     signInButtonView()
+                    Text("user\(userId)")
                 }
                 else {
+                    Text("user\(userId)")
 //                    if let name = fetchUserName() {
 //                          Text("Welcome, \(name)!")
 //                        } else {
@@ -100,7 +102,7 @@ struct signInButtonView: View {
                     let lastName = credential.fullName?.familyName
                     
                     // Access the CloudKit database
-                    let container = CKContainer(identifier: "iCloud.com.example.CKdb2")
+                    let container = CKContainer(identifier: "iCloud.com.thedreamers.ivy")
                     let privateDatabase = container.publicCloudDatabase
                     let predicate = NSPredicate(format: "userId == %@", userId)
                           let query = CKQuery(recordType: "User", predicate: predicate)
@@ -160,3 +162,42 @@ struct SIWASwiftUI_Previews: PreviewProvider {
         SIWASwiftUI()
     }
 }
+
+    struct User: Identifiable {
+
+        let id: CKRecord.ID
+        let userId : String
+        let firstName : String
+        let lastName : String
+        let email : String
+        let bio : String
+        let userImage: UIImage
+        let feedText: [String]
+        let feedImage: [UIImage]
+        let pointName: [String]
+        let pointTotal: [Int]
+        let pointGained: [Int]
+        let badgeName: [String]
+        let badgeImage: [UIImage]
+
+
+
+
+        init(record:CKRecord) {
+            self.id = record.recordID
+            self.userId = record["userId"]  as? String ?? "N/A"
+            self.firstName = record["firstName"]  as? String ?? "N/A"
+            self.lastName = record["lastName"]  as? String ?? "N/A"
+            self.email = record["email"]  as? String ?? "N/A"
+            self.bio = record["bio"] as? String ?? "N/A"
+            self.userImage = record["userImage"] as? UIImage ??  UIImage(named:"profile")!
+            self.feedText = []
+            self.feedImage = []
+            self.pointName = []
+            self.pointTotal = []
+            self.pointGained = []
+            self.badgeName = []
+            self.badgeImage = []
+        }
+
+    }

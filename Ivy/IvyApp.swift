@@ -9,12 +9,14 @@ import SwiftUI
 
 @main
 struct IvyApp: App {
+    @State private var onbordingAgain = true
     var body: some Scene {
+        
         WindowGroup {
 //      Tabs()
 //            ContentView()
-//           OnbordingView()
-            MainTabView()
+     //      OnbordingView()
+            MainTabView(onbordingAgain: $onbordingAgain)
         }
     }
 }
