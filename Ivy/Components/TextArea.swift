@@ -29,9 +29,12 @@ struct TextArea: View {
 
             TextEditor(text: $text)
                 .padding(4)
-                .frame(width: 275, height: 300)
+                .frame(width: 350, height: 200)
+                .border(Color(hue: 1.0, saturation: 0.0, brightness: 0.769), width: 1)
+
         }
         .font(.body)
+
     }
 }
 

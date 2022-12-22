@@ -40,7 +40,7 @@ struct HeartButton: View {
                 .resizable()
                 .aspectRatio (contentMode: .fit)
                 .frame(width: 17)
-                .foregroundColor (isLiked ? (Color("ourgreen")) : (Color("ourlightgray")))
+                .foregroundColor (isLiked ? (Color("ourgreen")) : (Color("ourgreen")))
         })
         .scaleEffect (animate ? animationScale : 1)
         .animation (.easeIn(duration: animationDuration))

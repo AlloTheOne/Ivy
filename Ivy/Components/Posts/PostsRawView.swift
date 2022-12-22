@@ -12,19 +12,22 @@ struct PostsRawView: View {
         VStack (alignment: .leading){
             //Profile + user info + post
             HStack(alignment: .top, spacing: 12){
-                    Circle()
+                Image("profile")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
                     .frame(width: 70, height: 70)
+                    .clipShape(Circle())
                     .foregroundColor(Color("ourdarkgray"))
                 //User info + Post
                 VStack (alignment: .leading, spacing: 4){
                     //user infor
                     VStack (alignment: .leading){
-                        Text("Dreamers")
+                        Text("Jomana Khaled")
                             .font(.subheadline).bold()
                             .foregroundColor(Color("ourdarkgray"))
 
                         HStack {
-                            Text("@dreamers")
+                            Text("@jomanakhaled")
                                 .font(.caption)
                                 .foregroundColor(Color("ourlightgray"))
 
@@ -34,7 +37,7 @@ struct PostsRawView: View {
                                 .foregroundColor(Color("ourlightgray"))
                         }
                     }
-                    .padding()
+                    .padding(.vertical)
 
                     VStack{
                         //post
@@ -85,7 +88,7 @@ struct PostsRawView: View {
               
             }
             .padding(.bottom, 5)
-            .foregroundColor(Color("ourlightgray"))
+            .foregroundColor(Color("ourgreen"))
             Divider()
 
         }

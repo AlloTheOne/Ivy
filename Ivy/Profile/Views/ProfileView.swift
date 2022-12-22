@@ -6,45 +6,92 @@
 //
 
 import SwiftUI
-
+import CloudKit
 struct ProfileView: View {
     @State private var GoToSting = false
     @State private var selectedFilter: TweetFilterViewModel = .tweets
+    @State var corentUser = ""
     @Namespace var animation
     @State var images = ["saveEarth", "energySaving", "ecoWater"]
     @State var points  = [[50,100], [20,100], [130,200], [90,100]]
 //    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-
+    @AppStorage("userId") var userId: String = ""
+    @StateObject private var vm = CloudKitUserBootcampViewModel()
+    private var isSignedIn: Bool {
+        !userId.isEmpty
+    }
+    
     var body: some View {
        
         VStack(alignment: .leading){
-            headerView
-            
-            userInfoDetails
+//            if isSignedIn {
+//                signInButtonView()
+//            }
+//            else {
+                //                    if let name = fetchUserName() {
+                //                          Text("Welcome, \(name)!")
+                //                        } else {
+                //                          Text("Please sign in to continue.")
+                //                        }
+//signInButtonView()
+                headerView
                 
-            tweetFilterBar
-            switch selectedFilter{
-            case .tweets:
-                pointsView
-            case .replies:
-                repliesView
-            case .likes:
-                tweetsView
-            }
+                userInfoDetails
+                
+                tweetFilterBar
+                switch selectedFilter{
+                case .tweets:
+                    pointsView
+                case .replies:
+                    repliesView
+                case .likes:
+                    tweetsView
+                }
+                
+                
+                Spacer()
+         //   }
             
-           
-            Spacer()
         }
+    }
+  //  View Model
+     func fetchUser(){
+        let container = CKContainer(identifier: "iCloud.com.thedreamers.ivy")
+        let predicateAll = NSPredicate(value: true)
+        let predicateJumana = NSPredicate(format: "name ==%@", "Jumana Khaled")
+        let query = CKQuery(recordType: "User", predicate: predicateAll)
+
+        let operations = CKQueryOperation(query: query)
+        operations.recordMatchedBlock = {  recordId, result in
+//            case .success( let records):
+//            let learner = Learner(record: records)
+//            self.learners.append(learner)
+            switch result {
+            case .success( let records):
+                let user = User(record: records)
+                self.corentUser =  "\(user.firstName) \(user.lastName)"
+                print("record: records")
+            case .failure( let error):
+                print(error.localizedDescription)
+                print("let error")
+            }
+        }
+        container.publicCloudDatabase.add(operations)
     }
 }
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        ZStack{
+            Color("ouroffwhite")
+                .ignoresSafeArea()
+            ProfileView()
+        }
     }
 }
 //(alignment: .bottomLeading)
 extension ProfileView{
+    
     var headerView: some View{
         ZStack{
             Color("ourlightgreen")
@@ -112,16 +159,19 @@ extension ProfileView{
     }
     
     var userInfoDetails: some View{
+        
+        
         VStack(alignment: .leading ,spacing: 4){
-            Text("Jomana Khaed")
+            //Text("Jomana Khaed")
+            Text("\(vm.userName)")
                 .font(.title2).bold()
-                .foregroundColor(Color("ourgreen"))
+                .foregroundColor(Color("ourdarkgray"))
             Text("@jomanakhaled")
                 .font(.subheadline)
                 .foregroundColor(Color("ourlightgray"))
             Text("lets provide healthy environment for us and the new generation")
                 .font(.subheadline).bold()
-                .foregroundColor(Color("ourlightgreen"))
+                .foregroundColor(Color("ourdarkgray"))
                 .padding(.vertical)
         }
         .offset( y: 80)
@@ -178,14 +228,15 @@ extension ProfileView{
             HStack{
                 //Spacer()
                 Text("Total Points :")
-                    .font(.title).bold()
-                    .foregroundColor(Color("ourlightgreen"))
+                    .font(.title2).bold()
+                    .foregroundColor(Color("ourgreen"))
                 Spacer()
                 Text("\(points[0][0]+points[1][0]+points[2][0]+points[3][0])")
-                    .font(.title).bold()
-                    .foregroundColor(Color("ourlightgreen"))
+                    .font(.title2).bold()
+                    .foregroundColor(Color("ourgreen"))
                 //Spacer()
-            }.padding()
+            }
+            .padding(.top)
                 .padding(.horizontal)
             ScrollView{
                 LazyVStack{
@@ -194,10 +245,10 @@ extension ProfileView{
                             HStack{
                                 Text("Habit No\(index+1)")
                                     .font(.title3).bold()
-                                    .foregroundColor(Color("ourgreen"))
+                                    .foregroundColor(Color("ourdarkgray"))
                                 Text("\(points[index][0])/\(points[index][1])")
                                     .font(.subheadline).italic()
-                                    .foregroundColor(Color("ourlightgreen"))
+                                    .foregroundColor(Color("ourgreen"))
                                 Spacer()
                             }
                             ProgressView( value: Double(points[index][0]),
