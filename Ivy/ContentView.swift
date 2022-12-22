@@ -23,6 +23,7 @@ struct ContentView: View {
                       //  .frame( height: 150)
                     // VStack {
                     ScrollView {
+                        
                         Rectangle()
                             .fill(Color("ourgreen"))
                             .frame(width: 350, height: 1)
@@ -30,16 +31,17 @@ struct ContentView: View {
                             .foregroundColor(Color("ourgreen"))
                         
                             .multilineTextAlignment(.center)
+                            .padding()
                         // .padding(.bottom, 10)
                         Rectangle()
                             .fill(Color("ourgreen"))
                             .frame(width: 350, height: 1)
-                            .padding(.bottom )
+//                            .padding(.bottom )
                         
                         
                         
                         grids()
-                        //                    Spacer()
+//                                            Spacer()
                     }
                     
                     

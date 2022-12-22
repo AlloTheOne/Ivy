@@ -52,19 +52,22 @@ struct NewPostView: View {
             VStack(alignment: .leading){
                 
                 HStack(alignment: .center, spacing: 12){
-                    Circle()
+                    Image("profile")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
                         .frame(width: 70, height: 70)
+                        .clipShape(Circle())
                         .foregroundColor(Color("ourdarkgray"))
                     //User info + Post
                     VStack (alignment: .leading, spacing: 4){
                         //user infor
                         VStack (alignment: .leading){
-                            Text("Dreamers")
+                            Text("Jomana Khaled")
                                 .font(.subheadline).bold()
                                 .foregroundColor(Color("ourdarkgray"))
-                            
+
                             HStack {
-                                Text("@dreamers")
+                                Text("@jomanakhaled")
                                     .font(.caption)
                                     .foregroundColor(Color("ourlightgray"))
                                 
